@@ -1,1 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>이움크리에이티브 | 병원 마케팅 전문 대행사</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #006241;
+    --green-light: #00855a;
+    --green-pale: #e8f3ef;
+    --black: #111111;
+    --gray-dark: #333333;
+    --gray-mid: #777777;
+    --gray-light: #f4f4f4;
+    --white: #ffffff;
+    --accent: #00c97a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans KR', sans-serif; background: var(--white); color: var(--black); font-size: 15px; line-height: 1.5; overflow-x: hidden; }
+
+  header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(0,0,0,0.07); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 18px; font-weight: 900; color: var(--green); letter-spacing: -1.5px; }
+  .logo span { color: var(--black); }
+  .header-cta { background: var(--green); color: var(--white); border: none; border-radius: 6px; padding: 8px 16px; font-size: 13px; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; }
+
+  .hero { padding: 100px 20px 56px; background: var(--black); position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -60px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(0,98,65,0.5) 0%, transparent 70%); border-radius: 50%; }
+  .hero-tag { display: inline-block; background: var(--green); color: var(--white); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 3px; margin-bottom: 20px; text-transform: uppercase; }
+  .hero h1 { font-size: 28px; font-weight: 900; color: var(--white); line-height: 1.2; letter-spacing: -2.0px; margin-bottom: 18px; }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 32px; }
+  .hero-btn { display: block; width: 100%; background: var(--accent); color: var(--black); font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 900; letter-spacing: -1.5px; padding: 18px 20px; border: none; border-radius: 10px; cursor: pointer; text-align: center; }
+  .hero-btn span { font-size: 12px; font-weight: 400; display: block; margin-top: 3px; opacity: 0.7; }
+
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 1.0px; color: var(--green); text-transform: uppercase; margin-bottom: 12px; }
+  
+  .hooks { padding: 56px 20px 40px; }
+  .hooks-intro { font-size: 20px; font-weight: 900; letter-spacing: -1.8px; line-height: 1.3; margin-bottom: 32px; }
+  .hook-card { background: var(--gray-light); border-radius: 12px; padding: 22px 20px; margin-bottom: 14px; border-left: 4px solid transparent; cursor: pointer; }
+  .hook-card.active { background: var(--green-pale); border-left-color: var(--green); }
+  .hook-card-num { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; color: var(--gray-mid); text-transform: uppercase; margin-bottom: 8px; }
+  .hook-card.active .hook-card-num { color: var(--green); }
+  .hook-card-text { font-size: 15px; font-weight: 700; color: var(--gray-dark); line-height: 1.4; letter-spacing: -1.3px; }
+  .hook-card.active .hook-card-text { color: var(--black); }
+  .hook-card-answer { display: none; font-size: 13px; color: var(--gray-mid); line-height: 1.6; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); }
+  .hook-card.active .hook-card-answer { display: block; }
+
+  .why { padding: 48px 20px; background: var(--black); }
+  .why .section-label { color: var(--accent); }
+  .why-title { font-size: 22px; font-weight: 900; color: var(--white); line-height: 1.3; letter-spacing: -1.8px; margin-bottom: 32px; }
+  .why-title em { color: var(--accent); font-style: normal; }
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 20px 16px; text-align: center; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--accent); line-height: 0.9; margin-bottom: 6px; }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.3; }
+
+  .strengths { padding: 52px 20px; }
+  .strengths-title { font-size: 20px; font-weight: 900; letter-spacing: -1.8px; line-height: 1.3; margin-bottom: 8px; }
+  .strengths-sub { font-size: 13px; color: var(--gray-mid); margin-bottom: 32px; line-height: 1.5; }
+  .strength-card { border: 1.5px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 24px 20px; margin-bottom: 14px; border-left: 4px solid var(--green); }
+  .strength-icon { font-size: 24px; margin-bottom: 12px; }
+  .strength-name { font-size: 15px; font-weight: 700; letter-spacing: -1.4px; margin-bottom: 6px; }
+  .strength-desc { font-size: 13px; color: var(--gray-mid); line-height: 1.6; }
+  .strength-desc strong { color: var(--green); font-weight: 700; }
+
+  .services { padding: 52px 20px; background: var(--gray-light); }
+  .services-title { font-size: 20px; font-weight: 900; letter-spacing: -1.8px; line-height: 1.3; margin-bottom: 8px; }
+  .services-sub { font-size: 13px; color: var(--gray-mid); margin-bottom: 32px; line-height: 1.5; }
+  .service-item { display: flex; gap: 16px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid rgba(0,0,0,0.07); }
+  .service-item:last-child { border-bottom: none; }
+  .service-icon { width: 44px; height: 44px; background: var(--white); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .service-name { font-size: 15px; font-weight: 700; letter-spacing: -1.4px; margin-bottom: 4px; }
+  .service-desc { font-size: 13px; color: var(--gray-mid); line-height: 1.5; }
+
+  .case { padding: 48px 20px; background: var(--green); }
+  .case .section-label { color: rgba(255,255,255,0.6); }
+  .case-title { font-size: 22px; font-weight: 900; color: var(--white); letter-spacing: -1.8px; line-height: 1.3; margin-bottom: 28px; }
+  .case-title em { color: var(--accent); font-style: normal; }
+  .case-card { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 22px 20px; margin-bottom: 14px; }
+  .case-region { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+  .case-text { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.4; letter-spacing: -1.3px; margin-bottom: 6px; }
+  .case-sub { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+  .diff { padding: 52px 20px; background: var(--black); }
+  .diff-title { font-size: 22px; font-weight: 900; color: var(--white); letter-spacing: -1.8px; line-height: 1.3; margin-bottom: 28px; }
+  .diff-list { list-style: none; }
+  .diff-list li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.4; }
+  .diff-list li:last-child { border-bottom: none; }
+  .diff-list li::before { content: '✓'; color: var(--accent); font-weight: 900; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+  .process { padding: 52px 20px; }
+  .process-title { font-size: 20px; font-weight: 900; letter-spacing: -1.8px; line-height: 1.3; margin-bottom: 8px; }
+  .process-sub { font-size: 13px; color: var(--gray-mid); margin-bottom: 32px; }
+  .step-list { position: relative; }
+  .step-list::before { content: ''; position: absolute; left: 18px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--green), var(--accent)); }
+  .step { display: flex; gap: 16px; align-items: flex-start; padding-bottom: 28px; position: relative; }
+  .step:last-child { padding-bottom: 0; }
+  .step-dot { width: 38px; height: 38px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: var(--white); flex-shrink: 0; position: relative; z-index: 1; }
+  .step-name { font-size: 15px; font-weight: 700; letter-spacing: -1.4px; margin-bottom: 4px; padding-top: 8px; }
+  .step-desc { font-size: 13px; color: var(--gray-mid); line-height: 1.5; }
+
+  .cta-form { padding: 52px 20px 40px; background: var(--black); }
+  .cta-form-title { font-size: 22px; font-weight: 900; color: var(--white); letter-spacing: -1.8px; line-height: 1.3; margin-bottom: 8px; }
+  .cta-form-title em { color: var(--accent); font-style: normal; }
+  .cta-form-sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 28px; line-height: 1.5; }
+  .form-group { margin-bottom: 14px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: -0.5px; margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 14px 16px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; color: var(--white); outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group select option { background: #222; color: var(--white); }
+  .form-group textarea { resize: none; height: 100px; }
+  .submit-btn { display: block; width: 100%; background: var(--accent); color: var(--black); font-family: 'Noto Sans KR', sans-serif; font-size: 17px; font-weight: 900; letter-spacing: -1.5px; padding: 18px; border: none; border-radius: 10px; margin-top: 20px; cursor: pointer; }
+  .form-note { font-size: 11px; color: rgba(255,255,255,0.25); text-align: center; margin-top: 14px; line-height: 1.5; }
+
+  footer { padding: 28px 20px; background: #0a0a0a; text-align: center; }
+  .footer-logo { font-size: 16px; font-weight: 900; color: var(--green); margin-bottom: 8px; }
+  .footer-logo span { color: var(--white); }
+  .footer-info { font-size: 11px; color: rgba(255,255,255,0.2); line-height: 1.7; }
+
+  .float-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99; background: var(--white); border-top: 1px solid rgba(0,0,0,0.1); padding: 12px 20px; display: flex; gap: 10px; align-items: center; transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+  .float-cta.visible { transform: translateY(0); }
+  .float-cta-text { font-size: 13px; font-weight: 700; letter-spacing: -1.3px; flex: 1; }
+  .float-cta-text small { display: block; font-size: 11px; font-weight: 400; color: var(--gray-mid); margin-top: 1px; }
+  .float-cta-btn { background: var(--green); color: var(--white); font-family: 'Noto Sans KR', sans-serif; font-size: 14px; font-weight: 700; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.show { display: flex; }
+  .modal-box { background: var(--white); border-radius: 16px; padding: 36px 24px; text-align: center; width: 100%; max-width: 320px; }
+  .modal-icon { width: 60px; height: 60px; background: var(--green-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 28px; }
+  .modal-title { font-size: 18px; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 8px; }
+  .modal-desc { font-size: 13px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 24px; }
+  .modal-close { display: block; width: 100%; background: var(--green); color: var(--white); font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 700; padding: 14px; border: none; border-radius: 8px; cursor: pointer; }
+
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">이움<span>크리에이티브</span></div>
+  <button class="header-cta" onclick="scrollToForm()">무료 상담 신청</button>
+</header>
+
+<section class="hero">
+  <div class="hero-tag">병원 마케팅 전문 대행사</div>
+  <h1>콘텐츠는 올리는데<br><em>예약이 안 되는 이유</em>,<br>저희가 알고 있습니다.</h1>
+  <p class="hero-sub">병원 마케팅 10년<br>콘텐츠 기획부터 채널 운영까지<br>외주 없이 직접 실행하는 전문팀</p>
+  <button class="hero-btn" onclick="scrollToForm()">지금 무료 상담 신청하기<span>1영업일 내 담당자 연락드립니다</span></button>
+</section>
+
+<section class="hooks">
+  <div class="section-label">Pain Point</div>
+  <p class="hooks-intro">혹시 이런 상황<br>겪고 계신가요?</p>
+  <div class="hook-card active" onclick="toggleCard(this)">
+    <div class="hook-card-num">상황 01</div>
+    <div class="hook-card-text">콘텐츠는 계속 올리는데 예약으로 안 이어지는 병원들의 공통점이 있습니다.</div>
+    <div class="hook-card-answer">업로드 빈도와 예약 전환은 별개입니다. 채널 선택, 타겟 메시지, CTA 구조가 함께 맞물려야 행동으로 이어집니다. 방향 없이 쌓인 콘텐츠는 리소스 낭비로 끝납니다.</div>
+  </div>
+  <div class="hook-card" onclick="toggleCard(this)">
+    <div class="hook-card-num">상황 02</div>
+    <div class="hook-card-text">병원 SNS, 열심히 할수록 오히려 역효과인 경우가 있어요.</div>
+    <div class="hook-card-answer">전략 없이 올린 콘텐츠가 브랜드 이미지를 흐립니다. 특히 커뮤니티 채널에서 잘못된 메시지가 쌓이면 신뢰 회복이 더 어려워집니다.</div>
+  </div>
+  <div class="hook-card" onclick="toggleCard(this)">
+    <div class="hook-card-num">상황 03</div>
+    <div class="hook-card-text">직접 하기엔 시간 없고, 맡기기엔 믿음이 안 가는 병원 마케팅 담당자분께.</div>
+    <div class="hook-card-answer">병원을 모르는 대행사에 맡겼다가 결과 없이 계약만 반복된 경험. 저희는 병원 마케팅만 10년, 외주가 아닌 전담팀이 직접 실행합니다.</div>
+  </div>
+  <div class="hook-card" onclick="toggleCard(this)">
+    <div class="hook-card-num">상황 04</div>
+    <div class="hook-card-text">예약이 꾸준히 들어오는 병원들, 마케팅 방식이 따로 있습니다.</div>
+    <div class="hook-card-answer">채널 하나씩 키우는 게 아닙니다. 검색·SNS·커뮤니티가 하나의 전략 안에서 연동될 때 효과가 납니다. 그 구조를 저희가 설계하고 직접 운영합니다.</div>
+  </div>
+</section>
+
+<section class="why fade-up">
+  <div class="section-label">Why 이움크리에이티브</div>
+  <p class="why-title">병원 마케팅,<br><em>아무나 할 수 있지만</em><br>아무나 잘 하진 않습니다.</p>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num">10+</div><div class="stat-label">병원 마케팅<br>전문 경력</div></div>
+    <div class="stat-box"><div class="stat-num">직접</div><div class="stat-label">외주 없이<br>전 과정 실행</div></div>
+    <div class="stat-box"><div class="stat-num">자체</div><div class="stat-label">매체 모니터링<br>전용 프로그램</div></div>
+    <div class="stat-box"><div class="stat-num">전국</div><div class="stat-label">강남·대구·부산<br>운영 경험</div></div>
+  </div>
+</section>
+
+<section class="strengths fade-up">
+  <div class="section-label">Strengths</div>
+  <p class="strengths-title">이움이 다른<br>3가지 이유</p>
+  <div class="strength-card">
+    <div class="strength-icon">🔍</div>
+    <div class="strength-name">커뮤니티 채널 모니터링 · 운영</div>
+    <div class="strength-desc">네이버 카페, 성형 커뮤니티, 맘카페 등 <strong>다양한 성형 커뮤니티 채널을 자체 프로그램으로 모니터링</strong>하고 실시간 반응을 파악해 콘텐츠 방향에 즉시 반영합니다.</div>
+  </div>
+  <div class="strength-card">
+    <div class="strength-icon">⚙️</div>
+    <div class="strength-name">외주 없이 전 과정 직접 실행</div>
+    <div class="strength-desc">기획, 콘텐츠 제작, 채널 운영까지 <strong>내부에서 전 과정을 직접 실행</strong>합니다. 외주로 인한 품질 편차와 커뮤니케이션 비용이 없습니다.</div>
+  </div>
+  <div class="strength-card">
+    <div class="strength-icon">📊</div>
+    <div class="strength-name">자체 개발 매체 모니터링 프로그램</div>
+    <div class="strength-desc">자체 개발한 프로그램으로 <strong>매체별 반응, 경쟁 병원 동향, 채널 성과를 통합 관리</strong>합니다. 데이터 기반으로 전략을 빠르게 수정합니다.</div>
+  </div>
+</section>
+
+<section class="services fade-up">
+  <div class="section-label">Services</div>
+  <p class="services-title">병원 마케팅에<br>필요한 것들</p>
+  <p class="services-sub">다수의 병원 운영 노하우를 기반으로<br>전략적 마케팅을 설계합니다.</p>
+  <div class="service-item"><div class="service-icon">📱</div><div><div class="service-name">SNS 콘텐츠 기획 · 운영</div><div class="service-desc">인스타그램, 스레드, 네이버 블로그 등 플랫폼별 콘텐츠 전략 수립 및 직접 운영</div></div></div>
+  <div class="service-item"><div class="service-icon">💬</div><div><div class="service-name">커뮤니티 채널 운영 관리</div><div class="service-desc">성형 커뮤니티, 맘카페, 네이버 카페 등 병원 관련 채널 모니터링 및 대응 운영</div></div></div>
+  <div class="service-item"><div class="service-icon">🎨</div><div><div class="service-name">병원 브랜딩</div><div class="service-desc">병원 아이덴티티 설계, 브랜드 가이드라인 구축 및 비주얼 방향성 정립</div></div></div>
+  <div class="service-item"><div class="service-icon">🌏</div><div><div class="service-name">글로벌 마케팅 · 해외 환자 유치</div><div class="service-desc">글로벌 마케팅 전담팀을 통한 해외 채널 운영 및 외국인 환자 유치</div></div></div>
+</section>
+
+<section class="case fade-up">
+  <div class="section-label">Case</div>
+  <p class="case-title">강남만이 아닙니다.<br><em>전국 어디든</em> 함께합니다.</p>
+  <div class="case-card">
+    <div class="case-region">서울 · 강남</div>
+    <div class="case-text">경쟁이 가장 치열한 강남권에서 쌓은 병원 마케팅 노하우</div>
+    <div class="case-sub">다양한 진료과목·규모 병원 운영 경험 보유</div>
+  </div>
+  <div class="case-card">
+    <div class="case-region">대구 · 부산</div>
+    <div class="case-text">지방 주요 도시 마케팅 시작 3개월 만에 매출 상승</div>
+    <div class="case-sub">지역 타겟 특성에 맞는 채널 전략과 커뮤니티 운영 적용</div>
+  </div>
+</section>
+
+<section class="diff fade-up">
+  <p class="diff-title">일반 대행사와<br>다른 점 딱 하나</p>
+  <ul class="diff-list">
+    <li>병원 마케팅 10년 노하우 기반의 전략 설계</li>
+    <li>기획·콘텐츠·채널 운영까지 외주 없이 직접 실행</li>
+    <li>자체 개발 프로그램으로 매체별 통합 모니터링</li>
+    <li>성형 커뮤니티 채널 전문 운영 관리 가능</li>
+    <li>강남·대구·부산 지역 실전 운영 경험 보유</li>
+  </ul>
+</section>
+
+<section class="process fade-up">
+  <div class="section-label">Process</div>
+  <p class="process-title">상담부터 운영까지<br>어떻게 진행되나요?</p>
+  <p class="process-sub">복잡한 온보딩 없이 빠르게 시작합니다.</p>
+  <div class="step-list">
+    <div class="step"><div class="step-dot">1</div><div><div class="step-name">무료 상담 신청</div><div class="step-desc">현재 운영 현황과 목표를 공유해 주세요. 1영업일 내 담당자가 연락드립니다.</div></div></div>
+    <div class="step"><div class="step-dot">2</div><div><div class="step-name">현황 진단 미팅</div><div class="step-desc">채널 현황, 타겟, 경쟁 병원 분석을 통해 문제 지점을 함께 찾습니다.</div></div></div>
+    <div class="step"><div class="step-dot">3</div><div><div class="step-name">전략 제안 및 견적</div><div class="step-desc">병원 상황에 맞는 서비스 조합과 운영 계획을 제안드립니다.</div></div></div>
+    <div class="step"><div class="step-dot">4</div><div><div class="step-name">계약 및 운영 시작</div><div class="step-desc">전담팀 배정 후 빠른 온보딩으로 바로 시작합니다.</div></div></div>
+  </div>
+</section>
+
+<section class="cta-form" id="form">
+  <div id="dbForm">
+  <p class="cta-form-title">지금 바로<br><em>무료 상담 신청</em>하세요</p>
+  <p class="cta-form-sub">부담 없이 현황만 공유해 주세요.<br>맞는 방향을 먼저 알려드립니다.</p>
+  <div class="form-group">
+    <label for="f-hospital">병원명 <span style="color:#ff6b6b;">*</span></label>
+    <input id="f-hospital" type="text" placeholder="병원 또는 클리닉 이름">
+  </div>
+  <div class="form-group">
+    <label for="f-name">담당자 성함 <span style="color:#ff6b6b;">*</span></label>
+    <input id="f-name" type="text" placeholder="원장님 또는 담당자 이름">
+  </div>
+  <div class="form-group">
+    <label for="f-phone">연락처 <span style="color:#ff6b6b;">*</span></label>
+    <input id="f-phone" type="tel" placeholder="010-0000-0000">
+  </div>
+  <div class="form-group">
+    <label for="f-channel">현재 운영 중인 채널</label>
+    <select id="f-channel">
+      <option value="" disabled selected>선택해 주세요</option>
+      <option>인스타그램만 운영 중</option>
+      <option>네이버 블로그만 운영 중</option>
+      <option>인스타그램 + 블로그 모두</option>
+      <option>커뮤니티 채널 운영 중</option>
+      <option>현재 아무것도 운영 안 함</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="f-memo">문의 내용 (선택)</label>
+    <textarea id="f-memo" placeholder="현재 고민이나 원하는 것을 자유롭게 적어주세요."></textarea>
+  </div>
+  <button class="submit-btn" id="submit-btn" onclick="submitForm()">무료 상담 신청하기</button>
+  <p class="form-note">입력하신 정보는 상담 목적으로만 사용되며 외부에 제공되지 않습니다.</p>
+  </div>
+
+  <div id="formSuccess" style="display:none; text-align:center; padding:40px 0;">
+    <div style="font-size:48px; margin-bottom:20px;">✅</div>
+    <p style="font-size:18px; font-weight:900; color:#fff; letter-spacing:-0.8px; margin-bottom:12px;">상담 신청이 완료되었습니다!</p>
+    <p style="font-size:14px; color:rgba(255,255,255,0.55); line-height:1.7;">담당자가 <strong style="color:#00c97a;">1영업일 내</strong> 연락드리겠습니다.<br>빠른 문의는 전화로 연락 주세요.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">이움<span>크리에이티브</span></div>
+  <div class="footer-info">do eum, do creative<br>서울특별시 | 병원 마케팅 전문 대행사<br>© 2025 이움크리에이티브. All rights reserved.</div>
+</footer>
+
+<div class="float-cta" id="floatCta">
+  <div class="float-cta-text">지금 무료 상담 신청<small>1영업일 내 연락드립니다</small></div>
+  <button class="float-cta-btn" onclick="scrollToForm()">신청하기</button>
+</div>
+
+
+
+<script>
+  // ✅ Google Apps Script 배포 URL로 교체하세요
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw1yNXaHvr5xyiGWtdpTMC_HPeQGbk9HyWZwZ4k7y7mwUAGUvYDNhdiilQyYyVXSnlK/exec';
+
+  function toggleCard(el) { document.querySelectorAll('.hook-card').forEach(c=>c.classList.remove('active')); el.classList.add('active'); }
+  function scrollToForm() { document.getElementById('form').scrollIntoView({behavior:'smooth'}); }
+
+  async function submitForm() {
+    const hospital = document.getElementById('f-hospital').value.trim();
+    const name     = document.getElementById('f-name').value.trim();
+    const phone    = document.getElementById('f-phone').value.trim();
+    const channel  = document.getElementById('f-channel').value;
+    const memo     = document.getElementById('f-memo').value.trim();
+
+    if (!hospital || !name || !phone) {
+      alert('병원명, 담당자 성함, 연락처는 필수 입력 항목입니다.');
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = '전송 중...';
+    btn.disabled = true;
+
+    const params = new URLSearchParams({
+      hospital,
+      name,
+      phone,
+      channel: channel || '-',
+      memo:    memo    || '-',
+      submitted: new Date().toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'})
+    });
+
+    try {
+      await fetch(SCRIPT_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' });
+    } catch(e) {}
+
+    document.getElementById('dbForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  window.addEventListener('scroll', ()=>{ document.getElementById('floatCta').classList.toggle('visible', window.scrollY > 400); });
+  const obs = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.15});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
 
